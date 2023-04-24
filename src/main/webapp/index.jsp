@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,6 +10,7 @@
     <title>Document</title>
 </head>
 <body>
+    <%@ include file="header.jsp"%>
     <div class="container">
     <div>
         <h2>게시판</h2>
@@ -31,8 +31,12 @@
                     while(rs.next()) {
             %>
                 <tr>
-                    <td><%=rs.getInt("id")%></td>
-                    <td><%= rs.getString("title")%></td>
+                    <td><%= rs.getInt("id")%></td>
+                    <td>
+                        <a href="view.jsp?id=<%=rs.getInt("id")%>">
+                        <%= rs.getString("title")%>
+                        </a>
+                    </td>
                     <td><%= rs.getString("author")%></td>
                     <td><%= rs.getString("created_at")%></td>
                 </tr>
@@ -44,10 +48,28 @@
             %>
             </tbody>
         </table>
+        <%
+        if (session.getAttribute("userId") !=null ) {
+        %>
         <div>
-            <a href="write.jsp" class = "btn btn-primary">글쓰기</a>
+            <a href="write.jsp" class="btn btn-primary">글쓰기</a>
         </div>
+        <%
+            }
+        %>
+
     </div>
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
